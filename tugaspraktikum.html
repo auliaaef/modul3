@@ -1,0 +1,92 @@
+<!--
+ | Aulia Asri Feybrianti-3411191115-DSEC
+ |-->
+ <!DOCTYPE html>
+<html>
+<head>
+	<title>Tugas Implementasi Interface</title>
+</head>
+<body>
+	<form name="formTugas" action="#" onsubmit="return checkForm(this);">
+	        <table>
+                <tr>
+                    <td>Username</td>
+                    <td><input type="text" name="username" id="username" placeholder="Username" required></td>
+                </tr>
+                <tr>
+                    <td>Password </td>
+                    <td><input title="Password minimal 4 digit dan terdapat huruf kapital, symbol dan angka!" type="Password" id="Password" placeholder="Password" name="Password" pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*_=+-]).{4,}$" onchange="this.setCustomValidity(this.validity.patternMismatch ? this.title : ''); if(this.checkValidity()) formTugas.repeat.pattern = RegExp.escape(this.value)" /></td>
+                </tr>
+                <tr>
+                    <td>Repeat </td>
+                    <td><input title="Password harus sama" type="Password" name="repeat" id="repeat" placeholder="Ulangi Password" required pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{4,}" onchange="this.setCustomValidity(this.validity.patternMismatch ? this.title :''); "></td>
+                </tr>
+                <tr>
+                    <td>Email </td>
+                    <td><input type="text" name="email" id="email" placeholder="Email" required></td>
+                </tr>
+                <tr>
+                    <td>No.Telpon </td>
+                    <td><input type="text" name="telpon" id="telpon" placeholder="No.Telpon" required></td>
+                </tr>
+                <tr>
+                    <td>Alamat </td>
+                    <td><textarea id="alamat" style="width: 167px;" placeholder="Alamat" required></textarea><br></td>
+                </tr>
+                <tr>
+                    <td><input type="submit" value="Submit" onclick="validateemail(document.formTugas.email)" /></td>
+                </tr>
+	        </table>
+    </form>
+
+	<script type="text/javascript">
+		window.onload = function(){
+			document.getElementById("username").onchange = validateuser;
+			document.getElementById("email").onchange = validateemail;
+			document.getElementById("telpon").onchange = validatetelpon;
+			document.getElementById("alamat").onchange = validatealamat;
+		
+		}
+
+		function validateuser(){
+			var user = document.formTugas.username.value;
+			if ((user.length < 3) || (sem > 15)) {
+				alert("Username diisi 3-15 digit");
+				return false;
+			}
+			return true;
+		}
+
+		function validateemail(inputText){
+			var mailformat = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+			if(inputText.value.match(mailformat)){
+				document.formTugas.email.focus();
+				return true;
+			}else{
+				alert("Alamat email anda tidak valid");
+				document.formTugas.email.focus();
+				return false;
+			}
+		}
+
+		function validatetelpon(){
+			var telp = document.formTugas.telpon.value;
+			if ((telp.length < 10) || (telp > 12)) {
+				alert("No Telpon diisi angka dan berjumlah 10 - 12 digit");
+				return false;
+			}
+			return true;
+		}
+
+			function validatealamat(){
+			var almt = document.formTugas.alamat.value;
+			if(almt == ""){
+				alert("Alamat harus diisi");
+				return false;
+			} else{
+				return true;
+			}
+		}
+	</script>
+</body>
+</html>
